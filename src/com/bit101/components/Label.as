@@ -30,6 +30,7 @@ package com.bit101.components
 {
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
+	import flash.text.AntiAliasType;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
@@ -73,6 +74,7 @@ package com.bit101.components
 			_tf = new TextField();
 			_tf.height = _height;
 			_tf.embedFonts = Style.embedFonts;
+			_tf.antiAliasType = AntiAliasType.ADVANCED;
 			_tf.selectable = false;
 			_tf.mouseEnabled = false;
 			_tf.defaultTextFormat = new TextFormat(Style.fontName, Style.fontSize, Style.LABEL_TEXT);
