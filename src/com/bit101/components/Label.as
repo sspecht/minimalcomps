@@ -49,10 +49,10 @@ package com.bit101.components
 		 * @param ypos The y position to place this component.
 		 * @param text The string to use as the initial text in this component.
 		 */
-		public function Label(parent:DisplayObjectContainer = null, xpos:Number = 0, ypos:Number =  0, text:String = "")
+		public function Label(parent:DisplayObjectContainer = null, xpos:Number = 0, ypos:Number =  0, text:String = "", customFormat:Object = null)
 		{
 			this.text = text;
-			super(parent, xpos, ypos);
+			super(parent, xpos, ypos, customFormat);
 		}
 		
 		/**
@@ -71,13 +71,21 @@ package com.bit101.components
 		override protected function addChildren():void
 		{
 			_height = 18;
+			if (_customHeight > 0) {
+				_height = _customHeight;
+			}
 			_tf = new TextField();
 			_tf.height = _height;
-			_tf.embedFonts = Style.embedFonts;
 			_tf.antiAliasType = AntiAliasType.ADVANCED;
 			_tf.selectable = false;
 			_tf.mouseEnabled = false;
-			_tf.defaultTextFormat = new TextFormat(Style.fontName, Style.fontSize, Style.LABEL_TEXT);
+			if (_customTextFormat) {
+				_tf.defaultTextFormat = _customTextFormat
+				_tf.embedFonts = _customEmbedFonts;
+			} else {
+				_tf.defaultTextFormat = new TextFormat(Style.fontName, Style.fontSize, Style.LABEL_TEXT);
+				_tf.embedFonts = Style.embedFonts;
+			}
 			_tf.text = _text;			
 			addChild(_tf);
 			draw();

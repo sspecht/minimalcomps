@@ -40,6 +40,7 @@ package com.bit101.components
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	import flash.filters.DropShadowFilter;
+	import flash.text.TextFormat;
 
 	[Event(name="resize", type="flash.events.Event")]
 	[Event(name="draw", type="flash.events.Event")]
@@ -51,7 +52,7 @@ package com.bit101.components
 		
 		// Flex 4.7 (labs/beta) sdk:
 		// SWF generated with fontswf utility bundled with the AIR SDK released on labs.adobe.com with Flash Builder 4.7 (including ASC 2.0) 
-		[Embed(source="../../../../assets/pf_ronda_seven.swf", symbol="PF Ronda Seven")]
+		[Embed(source="../../../assets/pf_ronda_seven.swf", symbol="PF Ronda Seven")]
 
 		// Flex 4.x sdk:
 		// [Embed(source="/assets/pf_ronda_seven.ttf", embedAsCFF="false", fontName="PF Ronda Seven", mimeType="application/x-font")]
@@ -63,6 +64,9 @@ package com.bit101.components
 		protected var _height:Number = 0;
 		protected var _tag:int = -1;
 		protected var _enabled:Boolean = true;
+		protected var _customTextFormat:TextFormat = null;
+		protected var _customEmbedFonts:Boolean = true;
+		protected var _customHeight:Number = -1;
 		
 		public static const DRAW:String = "draw";
 
@@ -72,9 +76,20 @@ package com.bit101.components
 		 * @param xpos The x position to place this component.
 		 * @param ypos The y position to place this component.
 		 */
-		public function Component(parent:DisplayObjectContainer = null, xpos:Number = 0, ypos:Number =  0)
+		public function Component(parent:DisplayObjectContainer = null, xpos:Number = 0, ypos:Number =  0, customFormat:Object = null )
 		{
 			move(xpos, ypos);
+			if (customFormat) {
+				if (customFormat.customTextFormat) {
+					_customTextFormat = customFormat.customTextFormat;
+				}
+				if (customFormat.customEmbedFonts) {
+					_customEmbedFonts = customFormat.customEmbedFonts;
+				}
+				if (customFormat.customHeight) {
+					_customHeight = customFormat._customHeight;
+				}
+			}
 			init();
 			if(parent != null)
 			{
