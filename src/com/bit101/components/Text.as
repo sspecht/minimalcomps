@@ -222,6 +222,19 @@ package com.bit101.components
             super.enabled = value;
             _tf.tabEnabled = value;
         }
+		
+		/**
+		 * Gets / sets whether or not this panel will be visible.
+		 */
+		public function set panelVisible(b:Boolean):void
+		{
+			_panel.visible = b;
+			invalidate();
+		}
+		public function get panelVisible():Boolean
+		{
+			return _panel.visible;
+		}
 
 	}
 }
